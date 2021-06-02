@@ -11,7 +11,7 @@ import os
 import requests
 from flask import Flask, render_template, request
 
-from MemeGenerator import MemeGenerator
+from MemeEngine import MemeGenerator
 from QuoteEngine import Ingestor, QuoteModel
 
 app = Flask(__name__)
