@@ -23,7 +23,7 @@ class CSVIngestor(IngestorInterface):
 
                 with open(path, 'r') as csv_file_to_read:
                     csv_file = reader(csv_file_to_read)
-
+                    next(csv_file)    
                     for each_row in csv_file:
                         if len(each_row) != 0:
                             body_text, author = each_row[0], each_row[1]

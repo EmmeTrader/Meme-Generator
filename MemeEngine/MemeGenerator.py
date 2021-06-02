@@ -33,10 +33,14 @@ class MemeGenerator:
         # add a text to the resized image
         text_length = len(text) + len(author)
         text_body = f'{text} {author}'
+        
         draw_image = ImageDraw.Draw(resized_image)
-        font_image = ImageFont.truetype(
-            './_data/fonts/LilitaOne-Regular.ttf',
-            size=18)
+        #font_image = ImageFont.truetype(
+         #   './_data/fonts/LilitaOne-Regular.ttf',
+          #  size=18)
+        font_image = ImageFont.truetype('./fonts/impact.ttf',
+                                        size=24)
+        #ImageFont.load_default()
         draw_image.text(
             (randint(0, text_length), randint(0, text_length)),
             text_body,
