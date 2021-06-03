@@ -16,7 +16,7 @@ from QuoteEngine import Ingestor, QuoteModel
 
 app = Flask(__name__)
 meme = MemeGenerator('./static')
-
+meme_create = MemeGenerator('./temp')
 
 def setup():
     """Loading all resources."""
@@ -60,12 +60,13 @@ def meme_post():
     """Creating a user defined meme."""
     image_url = request.form['image_url']
     text_body = QuoteModel(request.form['body'], request.form['author'])
-    response = requests.get(image_url)
-    path_temp = './temp/image_temp.png'
+    img_content = requests.get(image_url, allow_redirects=True).content
+    
+    path_temp = './image_temp.png'
 
     # write a temp image to a disk
     with open(path_temp, 'wb') as write_temp_image:
-        write_temp_image.write(response.content)
+        write_temp_image.write(img_content)
 
     # meme generation
     path = meme.make_meme(path_temp, text_body.body_text, text_body.author)

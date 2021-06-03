@@ -19,12 +19,17 @@ class MemeGenerator:
         """Creating a meme."""
         # load an image
         input_image = Image.open(img_path)
-
+        #print(f'input_image.size[0] = {input_image.size[0]}')
+        #print(f'input_image.size[1] = {input_image.size[1]}')
+        
         # transform the image parameters
         transform_width = min(width, 500)
         transform_ratio = transform_width / float(input_image.size[0])
         transform_height = int(transform_ratio * float(input_image.size[1]))
-
+        
+        #print(f'transform_width = {transform_width}')
+        #print(f'transform_height = {transform_height}')
+        
         # resize an input image
         resized_image = input_image.resize(
             (transform_width, transform_height), Image.NEAREST
@@ -32,17 +37,19 @@ class MemeGenerator:
 
         # add a text to the resized image
         text_length = len(text) + len(author)
-        text_body = f'{text} {author}'
+        text_body = f'{text} - {author}'
+        #print(f'text = {text_body}')
         
         draw_image = ImageDraw.Draw(resized_image)
-        #font_image = ImageFont.truetype(
-         #   './_data/fonts/LilitaOne-Regular.ttf',
-          #  size=18)
+        
         font_image = ImageFont.truetype('./fonts/impact.ttf',
                                         size=24)
-        #ImageFont.load_default()
+        
+        text_coordinates = (randint(0, text_length), randint(0, text_length))
+        #print(f'text_coordinates = {text_coordinates}')
+        
         draw_image.text(
-            (randint(0, text_length), randint(0, text_length)),
+            text_coordinates,
             text_body,
             font=font_image,
             fill='white'
